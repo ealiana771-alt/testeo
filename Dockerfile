@@ -1,10 +1,11 @@
-FROM teddysun/v2ray:latest
+# 1. Bajamos la "caja" que ya trae Xray (recomendada por el GitHub oficial)
+FROM teddysun/xray:latest
 
-# Expose the correct container port (8080)
+# 2. Le decimos a Cloud Run que usaremos el puerto 8080
 EXPOSE 8080
 
-# Copy the VLESS config into the container
-COPY config.json /etc/v2ray/config.json
+# 3. Metemos TU configuración de GitHub dentro de la carpeta de Xray
+COPY config.json /etc/xray/config.json
 
-# Run V2Ray with the config file
-CMD ["v2ray", "run", "-config", "/etc/v2ray/config.json"]
+# 4. Arrancamos el programa que ya venía en la "caja"
+CMD ["xray", "run", "-config", "/etc/xray/config.json"]
